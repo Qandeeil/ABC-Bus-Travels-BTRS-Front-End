@@ -1,0 +1,60 @@
+.residencyInfo {
+    width: 60%;
+    padding: 80px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    & form {
+        width: 60%;
+        margin-top: 4rem;
+        & p {
+            color: #8692A6;
+            margin-top: 10px;
+            width: 80%;
+            line-height: 23px;
+            margin-bottom: 20px;
+        }
+        & .checkBox {
+            display: flex;
+            align-items: center;
+            & input {
+                accent-color: #1565D8;
+            }
+            & span {
+                color: #696F79;
+                margin-left: 11px;
+                font-size: 13px;
+                font-weight: 500;
+            }
+        }
+        & .titlePhoneNumber {
+            color: #696F79;
+            font-size: 12px;
+            font-weight: 500;
+            margin-top: 25px;
+            display: inline-block;
+        }
+        & .errorPhoneNumber {
+            color: red;
+        }
+        & .selectCountry {
+            width: 81%;
+            margin-top: 8px;
+        }
+        & .secured {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 81%;
+            margin-top: 10px;
+            & span{
+                color: #8692A6;
+                font-size: 12px;
+                margin-left: 5px;
+            }
+        }
+    }
+}

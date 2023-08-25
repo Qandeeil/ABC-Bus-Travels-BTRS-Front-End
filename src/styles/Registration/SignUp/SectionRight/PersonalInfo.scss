@@ -1,0 +1,36 @@
+.PersonalInfoSectionRight {
+    width: 60%;
+    padding: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    padding-top: 9rem;
+    & form {
+        & p {
+            color: #8692A6;
+            margin-top: 10px;
+            width: 80%;
+            line-height: 23px;
+            margin-bottom: 20px;
+        }
+        & .checkBox {
+            display: flex;
+            align-items: center;
+            & input {
+                accent-color: #1565D8;
+            }
+            & span {
+                color: #696F79;
+                margin-left: 11px;
+                font-size: 13px;
+                font-weight: 500;
+            }
+            & .errorSpanInput {
+                color: red;
+                transition: .3s;
+            }
+        }
+    }
+}

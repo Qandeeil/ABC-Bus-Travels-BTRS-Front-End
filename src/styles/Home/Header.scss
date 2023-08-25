@@ -1,0 +1,50 @@
+.homeHeader {
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 2rem);
+    height: 5rem;
+    align-items: center;
+    border-bottom: 1px solid #d4d4d4a3;
+    padding-left: 2rem;
+    & .title {
+        & h1 {
+            font-size: 25px;
+        }
+    }
+    & .addTeamContainer {
+        display: flex;
+        align-items: center;
+        & .containerLogoSearch {
+            background-color: #D9D9D9;
+            padding: 10px 15px;
+            display: flex;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-right: 1rem;
+            & img {
+                width: 16px;
+                height: 16px;
+                object-fit: cover;
+            }
+        }
+        & .containerAddLogo {
+            display: flex;
+            align-items: center;
+            background-color: #55C875;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: #fff;
+            & img {
+                width: 17px;
+                height: 17px;
+                object-fit: cover;
+                margin-right: 7px;
+            }
+            & span {
+                font-size: 14px;
+                font-weight: 700;
+            }
+        }
+    }
+}

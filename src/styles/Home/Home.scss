@@ -1,0 +1,10 @@
+.home {
+    padding: 20px;
+    height: calc(100vh - 20px);
+    & .infoAccount {
+        display: flex;
+        & .content {
+            width: 80%;
+        }
+    }
+}
