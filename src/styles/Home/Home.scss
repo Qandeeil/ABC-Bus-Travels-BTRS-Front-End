@@ -5,6 +5,11 @@
         display: flex;
         & .content {
             width: 80%;
+            & .trips {
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+            }
         }
     }
 }

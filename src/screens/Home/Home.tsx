@@ -1,14 +1,16 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getUsers, getAdmins } from "../../store/Registration/SignUp";
-
+import { getAccounts } from "../../store/Registration/Accounts";
 import useLocalStorage from "use-local-storage";
-import { Account } from "../../interfaces/Account";
+import { Account } from "../../interfaces/global";
 import "../../styles/Home/Home.scss";
 import Header from "../../components/Home/Header";
 import Main from "../../components/Home/Main";
 import SectionLeft from "../../components/Home/SectionLeft";
+import CardTrip from "../../components/Home/CardTrip";
+import { getTrips } from "../../store/Trips/Trips";
+import { Trips } from "../../interfaces/global";
 
 interface UserData {
   _id: string;
@@ -27,52 +29,37 @@ const Home: React.FC = () => {
     if (!dataAccount) {
       window.location.href = "/Signin";
     } else {
-      if (dataAccount.case === "user") {
-        dispatch(getUsers());
-      } else if (dataAccount.case === "admin") {
-        dispatch(getAdmins());
-      }
+      dispatch(getAccounts());
+      dispatch(getTrips());
     }
   }, [dataAccount]);
 
-  const { users, admins } = useSelector((state: any) => state);
+  const { Accounts, Trips } = useSelector((state: any) => state);
 
-  const renderUserData = (userData: Account) => (
-    <div className="container" key={userData._id}>
-      <div className="containerImage">
-        <img src={userData.profilePicture} alt={`${userData.name}'s profile`} />
-      </div>
-      <div className="contanierBox">
-        <label>Name</label>
-        <span>{userData.name}</span>
-        <label>Country</label>
-        <span>{userData.country}</span>
-        <label>Phone</label>
-        <span>{userData.phoneNumber}</span>
-      </div>
-      <div className="contanierBox">
-        <label>Email</label>
-        <span>{userData.email}</span>
-        <label>Address</label>
-        <span>{userData.address}</span>
-        <label>Case</label>
-        <span>{userData.case}</span>
-      </div>
-    </div>
+  useEffect(() => {
+    dispatch(getTrips());
+  }, [Trips?.newTrip])
+
+  const user = Accounts.accounts.find(
+    (user: Account) => user._id === dataAccount?._id
   );
 
   return (
     <div className="home">
       {dataAccount && (
         <div className="infoAccount">
-          <SectionLeft />
+          <SectionLeft user={user} />
           <div className="content">
-            <Header />
-            <Main />
+            <Header user={user} />
+            <div className="trips">
+              {Trips?.trips.map((trip: Trips) => (
+                <CardTrip trip={trip} />
+              ))}
+            </div>
           </div>
         </div>
       )}
-      {/* <button onClick={() => setDataAccount(null)}>Logout</button> */}
+      <button onClick={() => setDataAccount(null)}>Logout</button>
     </div>
   );
 };

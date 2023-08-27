@@ -1,50 +1,105 @@
 .homeHeader {
-    display: flex;
-    justify-content: space-between;
-    width: calc(100% - 2rem);
-    height: 5rem;
-    align-items: center;
-    border-bottom: 1px solid #d4d4d4a3;
-    padding-left: 2rem;
-    & .title {
-        & h1 {
-            font-size: 25px;
-        }
+  display: flex;
+  justify-content: space-between;
+  width: calc(100% - 2rem);
+  height: 5rem;
+  align-items: center;
+  border-bottom: 1px solid #d4d4d4a3;
+  padding-left: 2rem;
+  & .title {
+    & h1 {
+      font-size: 25px;
     }
-    & .addTeamContainer {
-        display: flex;
-        align-items: center;
-        & .containerLogoSearch {
-            background-color: #D9D9D9;
-            padding: 10px 15px;
-            display: flex;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-right: 1rem;
-            & img {
-                width: 16px;
-                height: 16px;
-                object-fit: cover;
-            }
-        }
-        & .containerAddLogo {
-            display: flex;
-            align-items: center;
-            background-color: #55C875;
-            padding: 10px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            color: #fff;
-            & img {
-                width: 17px;
-                height: 17px;
-                object-fit: cover;
-                margin-right: 7px;
-            }
-            & span {
-                font-size: 14px;
-                font-weight: 700;
-            }
-        }
+  }
+  & .addTeamContainer {
+    display: flex;
+    align-items: center;
+    & .containerLogoSearch {
+      background-color: #d9d9d9;
+      padding: 10px 15px;
+      display: flex;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-right: 1rem;
+      & img {
+        width: 16px;
+        height: 16px;
+        object-fit: cover;
+      }
+    }
+    & .containerAddLogo {
+      display: flex;
+      align-items: center;
+      background-color: #55c875;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #fff;
+      & img {
+        width: 17px;
+        height: 17px;
+        object-fit: cover;
+        margin-right: 7px;
+      }
+      & span {
+        font-size: 14px;
+        font-weight: 700;
+      }
+    }
+  }
+  & .showMessage {
+    position: absolute;
+    left: 50%;
+    top: 1.5rem;
+    transform: translate(-50%);
+    background-color: #55c875;
+    width: 350px;
+    height: 4rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    top: -5rem;
+    animation: moveMessage 3s;
+    & img {
+        margin-right: 1rem;
+    }
+    & span {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+    }
+  }
+}
+
+
+@keyframes moveMessage {
+    0% {
+        top: -5rem;
+    }
+    20% {
+        top: 1.5rem;
+    }
+    30% {
+        top: 1.5rem;
+    }
+    40% {
+        top: 1.5rem;
+    }
+    50% {
+        top: 1.5rem;
+    }
+    60% {
+        top: 1.5rem;
+    }
+    70% {
+        top: 1.5rem;
+    }
+    80% {
+        top: 1.5rem;
+    }
+    100% {
+        top: -5rem;
     }
 }

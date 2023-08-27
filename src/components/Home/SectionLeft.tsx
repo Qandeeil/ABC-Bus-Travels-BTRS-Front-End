@@ -4,9 +4,13 @@ import calendar from './Logo/calendar-line.svg'
 import phone from './Logo/phone-line.svg'
 import mapPin from './Logo/map-pin-user-line.svg'
 import '../../styles/Home/SectionLeft.scss'
-import person from './Logo/person.svg'
+import { Account } from "../../interfaces/global";
 
-const SectionLeft = () => {
+type Props = {
+  user: Account
+}
+
+const SectionLeft: React.FC<Props> = ({user}) => {
   return (
     <div className="homeSectionLeft">
       <div className="logo">
@@ -14,22 +18,22 @@ const SectionLeft = () => {
         <span>Oasis</span>
       </div>
       <div className="contentUser">
-        <img src={person}/>
-        <h1>Mahmoud Qandeel</h1>
-        <span>mahmoudqandieel@gmail.com</span>
+        <img src={user?.profilePicture}/>
+        <h1>{user?.name}</h1>
+        <span>{user?.email}</span>
       </div>
       <div className="infoUser">
         <div className="info">
           <img src={calendar} alt="calendar"/>
-          <span>21-09-2001</span>
+          <span>{user?.username}</span>
         </div>
         <div className="info">
           <img src={phone} alt="phone"/>
-          <span>0775140765</span>
+          <span>{user?.phoneNumber}</span>
         </div>
         <div className="info">
           <img src={mapPin} alt="mapPin"/>
-          <span>Amman, Jordan</span>
+          <span>{user?.address}, {user?.country}</span>
         </div>
       </div>
     </div>

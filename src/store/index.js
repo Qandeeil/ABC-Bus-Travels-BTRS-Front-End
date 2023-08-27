@@ -1,10 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userSlice from './Registration/SignUp';
-import LoginSlice from "./Registration/Login";
+import Login from "./Registration/Login";
+import SignUp from "./Registration/SignUp";
+import Accounts from "./Registration/Accounts";
+import Trips from "./Trips/Trips";
 
 const store = configureStore({reducer: {
-    users: userSlice,
-    checkLogin: LoginSlice
+    Login,
+    SignUp,
+    Accounts,
+    Trips
 }})
 
 export default store

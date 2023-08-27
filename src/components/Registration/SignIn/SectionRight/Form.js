@@ -2,20 +2,18 @@ import React, { useEffect, useState } from "react";
 import "../../../../styles/Registration/SignIn/SectionRight/Form.scss";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser, loginAdmin } from "../../../../store/Registration/Login";
+import { loginAccount } from "../../../../store/Registration/Login";
 import useLocalStorage from "use-local-storage";
 
 const Form = () => {
   const [dataAccount, setDataAccount] = useLocalStorage("DataAccount", null);
-  const { checkLogin } = useSelector((state) => state);
+  const { Login } = useSelector((state) => state);
   const dispatch = useDispatch();
   const [emailORusername, setEmailORusername] = useState();
   const [password, setPassword] = useState();
 
   const [errorEmail, setErrorEmail] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
-
-  const [data, setData] = useState();
 
   const LoginHandler = (e) => {
     e.preventDefault();
@@ -27,20 +25,15 @@ const Form = () => {
         email: emailORusername,
         password: password,
       };
-      setData(Data)
       setErrorEmail(false);
       setErrorPassword(false);
-      dispatch(loginUser(Data));
+      dispatch(loginAccount(Data));
     }
-  };
+  }; 
 
   useEffect(() => {
-    if (!checkLogin?.isLogin?.isLoginEmail) {
-      dispatch(loginAdmin(data));
-    }
-    setDataAccount(checkLogin?.isLogin?.DataAccount)
-  }, [checkLogin?.isLogin?.isLoginEmail]);  
-
+    setDataAccount(Login?.isLogin?.DataAccount)
+  }, [Login]); 
 
   return (
     <div className="formSectionRight">
@@ -59,7 +52,7 @@ const Form = () => {
         <div
           className={
             errorEmail ||
-            (checkLogin.isLogin && !checkLogin?.isLogin?.isLoginEmail)
+            (Login.isLogin && !Login?.isLogin?.isLoginEmail)
               ? "container errorContainer"
               : "container"
           }
@@ -73,15 +66,15 @@ const Form = () => {
           <span style={{ marginTop: "5px", textAlign: "center" }}>
             {errorEmail
               ? "*Please fill in the field"
-              : !checkLogin?.isLogin?.isLoginEmail
-              ? checkLogin?.isLogin?.message
+              : !Login?.isLogin?.isLoginEmail
+              ? Login?.isLogin?.message
               : null}
           </span>
         </div>
         <div
           className={
             errorPassword ||
-            (checkLogin.isLogin && !checkLogin?.isLogin?.isLoginPassword)
+            (Login.isLogin && !Login?.isLogin?.isLoginPassword)
               ? "container errorContainer"
               : "container"
           }
@@ -95,8 +88,8 @@ const Form = () => {
           <span style={{ marginTop: "5px", textAlign: "center" }}>
             {errorPassword
               ? "*Please fill in the field"
-              : !checkLogin?.isLogin?.isLoginPassword
-              ? checkLogin?.isLogin?.message
+              : !Login?.isLogin?.isLoginPassword
+              ? Login?.isLogin?.message
               : null}
           </span>
         </div>

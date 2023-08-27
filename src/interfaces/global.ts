@@ -1,0 +1,34 @@
+export interface Account {
+  _id: string;
+  name: string;
+  username: string;
+  email: string;
+  password: string;
+  phoneNumber: string;
+  address: string;
+  country: string;
+  profilePicture: string;
+  bio: string;
+  case: string;
+}
+
+export interface Trip {
+  tripDestination: string,
+  startDate: Date,
+  endDate: Date,
+  price: Number,
+  busNumber: Number,
+  flightSupervisor: string,
+}
+
+export interface Trips {
+  _id: string,
+  tripDestination: string,
+  startDate: Date,
+  endDate: Date,
+  price: number,
+  busNumber: number,
+  flightSupervisor: string,
+  logoTrips: string,
+  passengers: [{}]
+}

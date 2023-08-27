@@ -6,7 +6,7 @@ import '../../../../styles/Registration/SignUp/SectionRight/ChoosePicture.scss';
 
 const ChoosePicture = ({caseSignup}) => {
   const dispatch = useDispatch();
-  const { users } = useSelector(state => state);
+  const { SignUp } = useSelector(state => state);
 
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
@@ -28,14 +28,14 @@ const ChoosePicture = ({caseSignup}) => {
 
   useEffect(() => {
     const formData = new FormData();
-    formData.append('_id', users?.createAccount?.userId ? users?.createAccount?.userId : users?.createAccount?.adminId);
+    formData.append('_id', SignUp?.createAccount?.userId ? SignUp?.createAccount?.userId : SignUp?.createAccount?.adminId);
 
     if (selectedFile) {
       formData.append('profilePicture', selectedFile);
       dispatch(updateProfilePicture({data: formData, case: caseSignup}));
     }
     console.log(selectedFile)
-  }, [selectedFile, users?.createAccount?.userId, users?.createAccount?.adminId, dispatch]);
+  }, [selectedFile, SignUp?.createAccount?.userId, SignUp?.createAccount?.adminId, dispatch]);
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 

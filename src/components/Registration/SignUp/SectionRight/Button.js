@@ -32,7 +32,7 @@ const Button = (props) => {
     caseSignup,
   } = props;
   const dispatch = useDispatch();
-  const { users } = useSelector((state) => state);
+  const { SignUp } = useSelector((state) => state);
   const [dataAccount, setDataAccount] = useLocalStorage("DataAccount", null);
 
   const registerAccountHandler = (e) => {
@@ -59,8 +59,8 @@ const Button = (props) => {
           username: username.replace(/\s/g, "").toLowerCase(),
           email: email.toLowerCase(),
           password: password,
+          caseC: caseSignup
         };
-        console.log({ data: data, case: caseSignup });
         dispatch(createAccount({ data: data, case: caseSignup }));
       }
     } else if (title == "Continue") {
@@ -71,9 +71,9 @@ const Button = (props) => {
 
     if (phoneNumber && country && address) {
       const data = {
-        _id: users?.createAccount?.userId
-          ? users?.createAccount?.userId
-          : users?.createAccount?.adminId,
+        _id: SignUp?.createAccount?.userId
+          ? SignUp?.createAccount?.userId
+          : SignUp?.createAccount?.adminId,
         phoneNumber: `+${phoneNumber}`,
         country: country,
         address: address,
@@ -81,34 +81,33 @@ const Button = (props) => {
       dispatch(updateAccount({ data: data, case: caseSignup }));
     } else if (phoneNumber && country) {
       const data = {
-        _id: users?.createAccount?.userId
-          ? users?.createAccount?.userId
-          : users?.createAccount?.adminId,
+        _id: SignUp?.createAccount?.userId
+          ? SignUp?.createAccount?.userId
+          : SignUp?.createAccount?.adminId,
         phoneNumber: `+${phoneNumber}`,
         country: country,
       };
       dispatch(updateAccount({ data: data, case: caseSignup }));
     } else if (address) {
       const data = {
-        _id: users?.createAccount?.userId
-          ? users?.createAccount?.userId
-          : users?.createAccount?.adminId,
+        _id: SignUp?.createAccount?.userId
+          ? SignUp?.createAccount?.userId
+          : SignUp?.createAccount?.adminId,
         address: address,
       };
       dispatch(updateAccount({ data: data, case: caseSignup }));
     }
-    setDataAccount(users?.createAccount?.DataAccount);
+    setDataAccount(SignUp?.createAccount?.DataAccount);
   };
 
-  console.log(users?.createAccount)
 
   useEffect(() => {
-    if (users?.createAccount?.userId || users?.createAccount?.adminId) {
+    if (SignUp?.createAccount?.userId || SignUp?.createAccount?.adminId) {
       setResidencyInfo(true);
       setPersonalInfo(false);
       setHome(false);
     }
-  }, [users, dataAccount]);
+  }, [SignUp, dataAccount]);
 
   useEffect(() => {
     if (dataAccount) {

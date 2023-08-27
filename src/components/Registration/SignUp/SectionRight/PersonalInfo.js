@@ -19,7 +19,7 @@ const PersonalInfo = (props) => {
   const [errorPassword, setErrorPassword] = useState(false);
   const [errorCheckbox, setErrorCheckbox] = useState(false);
 
-  const { users } = useSelector((state) => state);
+  const { SignUp } = useSelector((state) => state);
 
   return (
     <div className="PersonalInfoSectionRight">
@@ -51,8 +51,8 @@ const PersonalInfo = (props) => {
           getValue={setUsername}
           value={username?.replace(/\s/g, "").toLowerCase()}
           error={errorUsername}
-          checkDatabase={users?.createAccount?.checkUsername}
-          messageDatabase={users?.createAccount?.message}
+          checkDatabase={SignUp?.createAccount?.checkUsername}
+          messageDatabase={SignUp?.createAccount?.message}
           messageError={"Please enter a valid username"}
         />
         <TextInput
@@ -62,8 +62,8 @@ const PersonalInfo = (props) => {
           getValue={setEmail}
           value={email}
           error={errorEmail}
-          checkDatabase={users?.createAccount?.checkEmail}
-          messageDatabase={users?.createAccount?.message}
+          checkDatabase={SignUp?.createAccount?.checkEmail}
+          messageDatabase={SignUp?.createAccount?.message}
           messageError={"please enter a valid email address"}
         />
         <TextInput
