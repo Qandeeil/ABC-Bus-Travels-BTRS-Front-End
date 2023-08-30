@@ -30,5 +30,7 @@ export interface Trips {
   busNumber: number,
   flightSupervisor: string,
   logoTrips: string,
-  passengers: [{}]
+  passengers: [{}],
+  numberOfSeats: number,
+  description: string
 }

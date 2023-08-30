@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { Trip } from "../../interfaces/global";
 
@@ -28,17 +28,35 @@ export const newTrip = createAsyncThunk(
   }
 );
 
+export const deleteTrip = createAsyncThunk(
+  "trip/deleteTrip",
+  async (_id: any, thunkAPI) => {
+    try {
+      const response = await axios.delete(baseURL + "/trips/deleteTrip", { data: { _id } });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue((error as Error).message);
+    }
+  }
+);
+
 interface TripState {
   trips: Trip[];
-  newTrip: Trip | null;
+  newTrip: Trip | null | any;
+  deleteTrip: any
 }
 
-const initialState: TripState = { trips: [], newTrip: null };
+const initialState: TripState = { trips: [], newTrip: {result: false}, deleteTrip: {result: false} };
 
 const tripSlice = createSlice({
   name: "trip",
   initialState,
-  reducers: {},
+  reducers: {
+    resetTripFlags: (state) => {
+      state.newTrip.result = false;
+      state.deleteTrip.result = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getTrips.pending, (state) => {})
@@ -50,8 +68,14 @@ const tripSlice = createSlice({
       .addCase(newTrip.fulfilled, (state, action) => {
         state.newTrip = action.payload;
       })
-      .addCase(newTrip.rejected, (state) => {});
+      .addCase(newTrip.rejected, (state) => {})
+      .addCase(deleteTrip.pending, (state) => {})
+      .addCase(deleteTrip.fulfilled, (state, action) => {
+        state.deleteTrip = action.payload;
+      })
+      .addCase(deleteTrip.rejected, (state) => {})
   },
 });
 
+export const { resetTripFlags } = tripSlice.actions;
 export default tripSlice.reducer;

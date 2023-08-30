@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getAccounts } from "../../store/Registration/Accounts";
@@ -9,8 +9,9 @@ import Header from "../../components/Home/Header";
 import Main from "../../components/Home/Main";
 import SectionLeft from "../../components/Home/SectionLeft";
 import CardTrip from "../../components/Home/CardTrip";
-import { getTrips } from "../../store/Trips/Trips";
+import { getTrips, resetTripFlags } from "../../store/Trips/Trips";
 import { Trips } from "../../interfaces/global";
+import TripDetails from "../../components/Home/TripDetails";
 
 interface UserData {
   _id: string;
@@ -24,6 +25,7 @@ const Home: React.FC = () => {
   );
   const dispatch = useDispatch<any>();
   const { _id } = useParams();
+  const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
     if (!dataAccount) {
@@ -38,11 +40,14 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     dispatch(getTrips());
-  }, [Trips?.newTrip])
+  }, [Trips?.newTrip, Trips?.deleteTrip]);
+
 
   const user = Accounts.accounts.find(
     (user: Account) => user._id === dataAccount?._id
   );
+
+  const [tripDetails, setTripDetails] = useState<Trips>();
 
   return (
     <div className="home">
@@ -50,11 +55,27 @@ const Home: React.FC = () => {
         <div className="infoAccount">
           <SectionLeft user={user} />
           <div className="content">
-            <Header user={user} />
+            <Header
+              user={user}
+              setShowMessage={setShowMessage}
+              showMessage={showMessage}
+            />
             <div className="trips">
-              {Trips?.trips.map((trip: Trips) => (
-                <CardTrip trip={trip} />
-              ))}
+              {!tripDetails &&
+                Trips?.trips.map((trip: Trips) => (
+                  <CardTrip
+                    trip={trip}
+                    setTripDetails={setTripDetails}
+                    key={trip._id}
+                  />
+                ))}
+              {tripDetails && (
+                <TripDetails
+                  tripDetails={tripDetails}
+                  setTripDetails={setTripDetails}
+                  user={user}
+                />
+              )}
             </div>
           </div>
         </div>

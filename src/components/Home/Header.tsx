@@ -5,25 +5,27 @@ import "../../styles/Home/Header.scss";
 import { Account } from "../../interfaces/global";
 import AddTrip from "./AddTrip";
 import ChoosePicture from "./ChoosePicture";
-import { newTrip } from "../../store/Trips/Trips";
+import { newTrip, resetTripFlags } from "../../store/Trips/Trips";
 import { useDispatch, useSelector } from "react-redux";
 import circleYesLogo from "./Logo/Circle-Yes.svg";
+import close from "./Logo/close.svg";
 
 type Props = {
   user: Account;
+  showMessage: any;
+  setShowMessage: any;
 };
 
-const Header: React.FC<Props> = ({ user }) => {
+const Header: React.FC<Props> = ({ user, showMessage, setShowMessage }) => {
   const dispatch: any | void = useDispatch();
   const { Trips } = useSelector((state: { Trips: any }) => state);
   const [selectedFile, setSelectedFile] = useState<any>();
   const [showAddTrip, setShowAddTrip] = useState<Boolean>(false);
-  const [showMessage, setShowMessage] = useState(false);
   const [tripDestination, setTripDestination] = useState<string | null>();
   const [errorTripDestination, setErrorTripDestination] = useState<Boolean>(
     false
   );
-  const [busNumber, setBusNumber] = useState<Number | null>();
+  const [busNumber, setBusNumber] = useState<number>(0);
   const [errorBusNumber, setErrorBusNumber] = useState<Boolean>(false);
   const [flightSupervisor, setFlightSupervisor] = useState<string | null>();
   const [errorFlightSupervisor, setErrorFlightSupervisor] = useState<Boolean>(
@@ -35,6 +37,7 @@ const Header: React.FC<Props> = ({ user }) => {
   const [errorStartDate, setErrorStartDate] = useState<Boolean>(false);
   const [endDate, setEndDate] = useState<Date | null>();
   const [errorEndDate, setErrorEndDate] = useState<Boolean>(false);
+  const [description, setDescription] = useState<string>();
   const addTripHandler = async (e: any) => {
     e.preventDefault();
     tripDestination
@@ -64,6 +67,7 @@ const Header: React.FC<Props> = ({ user }) => {
       formData.append("startDate", startDate);
       formData.append("endDate", endDate);
       formData.append("LogoTrips", selectedFile);
+      formData.append("description", description);
 
       try {
         await dispatch(newTrip(formData));
@@ -95,24 +99,31 @@ const Header: React.FC<Props> = ({ user }) => {
     }
   };
   useEffect(() => {
-    if (Trips.newTrip?.result) {
+    if (Trips.newTrip?.result === true || Trips.deleteTrip?.result === true) {
       setShowAddTrip(false);
       setShowMessage(true);
       setTripDestination(null);
-      setBusNumber(null);
+      setBusNumber(0);
       setFlightSupervisor(null);
       setPrice(null);
       setStartDate(null);
       setEndDate(null);
       setSelectedFile(null);
 
+      console.log("useEffect");
+
       const timer = setTimeout(() => {
         setShowMessage(false);
-      }, 8000);
+        dispatch(resetTripFlags());
+      }, 3000);
 
       return () => clearTimeout(timer);
     }
-  }, [Trips?.newTrip]);
+  }, [Trips?.newTrip.result || Trips?.deleteTrip.result]);
+
+  console.log("newTrip ", Trips?.newTrip?.result);
+  console.log("deleteTrip ", Trips?.deleteTrip?.result);
+  console.log("show message", showMessage);
   return (
     <div className="homeHeader">
       <div className="title">
@@ -164,8 +175,15 @@ const Header: React.FC<Props> = ({ user }) => {
                 <label>Bus Number</label>
                 <input
                   type="number"
+                  maxLength={5}
                   placeholder="Enter your Bus Number"
-                  onChange={(e) => setBusNumber(e.target.valueAsNumber)}
+                  onChange={(e) => {
+                    const inputValue = e.target.value;
+                    if (/^\d{0,5}$/.test(inputValue)) {
+                      setBusNumber(parseInt(inputValue));
+                    }
+                  }}
+                  value={busNumber as number | undefined}
                 />
               </label>
               <label
@@ -203,18 +221,8 @@ const Header: React.FC<Props> = ({ user }) => {
                 <input
                   type="datetime-local"
                   onChange={(e) => {
-                    const inputValue = e.target.value;
-                    if (inputValue) {
-                      const date = new Date(inputValue);
-                      const hours = date.getHours();
-                      const meridiem = hours >= 12 ? "PM" : "AM";
-                      const formattedDate = new Date(
-                        date.getTime() + (hours >= 12 ? 12 : 0) * 60 * 60 * 1000
-                      );
-                      setStartDate(formattedDate);
-                    } else {
-                      setStartDate(null);
-                    }
+                    const selectedDate = new Date(e.target.value);
+                    setStartDate(selectedDate);
                   }}
                 />
               </label>
@@ -227,32 +235,40 @@ const Header: React.FC<Props> = ({ user }) => {
                 <input
                   type="datetime-local"
                   onChange={(e) => {
-                    const inputValue = e.target.value;
-                    if (inputValue) {
-                      const date = new Date(inputValue);
-                      const hours = date.getHours();
-                      const minutes = date.getMinutes();
-                      const meridiem = hours >= 12 ? "PM" : "AM";
-                      const formattedHours = hours % 12 || 12;
-                      const formattedDate = new Date(date);
-                      formattedDate.setHours(formattedHours);
-                      formattedDate.setMinutes(minutes);
-                      setEndDate(formattedDate);
-                    } else {
-                      setEndDate(null);
-                    }
+                    const selectedDate = new Date(e.target.value);
+                    setEndDate(selectedDate);
                   }}
                 />
               </label>
+              <label
+                className={
+                  errorEndDate ? "inputField errorInputField" : "inputField"
+                }
+              >
+                <label>Description</label>
+                <textarea
+                  style={{ resize: "none" }}
+                  placeholder="Enter Description"
+                  onChange={(e) => setDescription(e.target.value)}
+                ></textarea>
+              </label>
               <button onClick={addTripHandler}>Save</button>
             </form>
+            <div className="close" onClick={() => setShowAddTrip(false)}>
+              <img src={close} />
+            </div>
           </div>
         </AddTrip>
       )}
       {showMessage && (
         <div className="showMessage">
           <img src={circleYesLogo} />
-          <span>The flight has been added successfully</span>
+          <span>
+            {Trips?.newTrip?.result && "The flight has been added successfully"}
+          </span>
+          <span>
+            {Trips?.deleteTrip?.result && "The flight has been deleted"}
+          </span>
         </div>
       )}
     </div>
