@@ -26,12 +26,44 @@
     width: 25%;
     height: 400px;
     margin-top: 5rem;
+    position: relative;
     & img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       border-radius: 8px;
       box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+    & .status {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background-color: #55c875;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #fff;
+      font-size: 14px;
+      font-weight: bold;
+      box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+    & .false {
+      background-color: red;
+    }
+  }
+  & .SelectImage {
+    & span {
+      margin-top: 1rem;
+      text-align: center;
+      width: 100%;
+      display: inline-block;
+      background-color: #55c875;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 10px 0;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
     }
   }
   & .contentTrip {
@@ -52,6 +84,26 @@
         align-items: center;
         justify-content: space-between;
         width: 50%;
+        & input {
+          width: 40%;
+          height: 35px;
+          border: none;
+          background-color: transparent;
+          outline: none;
+          border: 1.5px solid #8692a6;
+          padding: 0 14px;
+          border-radius: 6px;
+          transition: 0.3s;
+          font-size: 12px;
+          margin-right: 1rem;
+          &:focus {
+            border: 1.5px solid #1565d8;
+            box-shadow: 0px 0px 14px 1px rgba(0, 0, 0, 0.1);
+          }
+          &::placeholder {
+            font-size: 11px;
+          }
+        }
       }
       & div:first-child {
         border-right: 1px solid #d4d4d4a3;
@@ -68,10 +120,31 @@
       & span:last-of-type {
         font-weight: 600;
         color: blue;
+        margin-right: 1rem;
       }
     }
     & .tripTitle:last-child {
       border: 0;
+    }
+    & textarea {
+      // height: 80px;
+      width: 100%;
+      border: 1.5px solid #8692a6;
+      background-color: transparent;
+      padding: 10px;
+      border-radius: 6px;
+      transition: 0.3s;
+      font-size: 12px;
+      outline: none;
+      margin-right: 2rem;
+      // margin-bottom: 2.5rem;
+      &:focus {
+        border: 1.5px solid #1565d8;
+        box-shadow: 0px 0px 14px 1px rgba(0, 0, 0, 0.1);
+      }
+      &::placeholder {
+        font-size: 11px;
+      }
     }
   }
   & .buttonTrips {
@@ -97,13 +170,20 @@
         color: rgb(55, 55, 249);
       }
     }
+    & .cancelReservation {
+      background-color: red;
+      border: 2px solid red;
+      &:hover {
+        color: red;
+      }
+    }
     & button:nth-child(2) {
-        background-color: #5e6282;
-        border: 2px solid #5e6282;
-        &:hover {
-            background-color: transparent;
-            color: #5e6282;
-          }
+      background-color: #5e6282;
+      border: 2px solid #5e6282;
+      &:hover {
+        background-color: transparent;
+        color: #5e6282;
+      }
     }
     & button:nth-child(3) {
       background-color: red;
@@ -111,6 +191,36 @@
       &:hover {
         background-color: transparent;
         color: red;
+      }
+    }
+    & .statusFalse {
+      background-color: #5e6282;
+      border: 2px solid #5e6282;
+      cursor: no-drop;
+      &:hover {
+        background-color: #5e6282;
+        color: #fff;
+      }
+    }
+    & select {
+      border: 2px solid #5e6282;
+      padding: 10px 15px;
+      border-radius: 8px;
+    }
+  }
+  & .editButton {
+    & button:nth-child(2) {
+      background-color: #55c875;
+      border: 2px solid #55c875;
+      &:hover {
+        color: #fff;
+        transform: scale(1.08);
+      }
+    }
+    & button:nth-child(2) {
+      &:hover {
+        color: #5e6282;
+        transform: scale(1.08);
       }
     }
   }

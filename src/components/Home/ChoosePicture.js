@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
-const ChoosePicture = ({setSelectedFile, selectedFile}) => {
+const ChoosePicture = ({setSelectedFile, selectedFile, srcImage}) => {
   
   const [preview, setPreview] = useState();
 
@@ -71,7 +71,7 @@ const ChoosePicture = ({setSelectedFile, selectedFile}) => {
             />
           ) : (
             <div style={{height: "90%", marginBottom: 0}}>
-              <img src="https://cdn.vectorstock.com/i/preview-1x/82/99/no-image-available-like-missing-picture-vector-43938299.jpg"  />
+              <img src={srcImage ? srcImage : "https://cdn.vectorstock.com/i/preview-1x/82/99/no-image-available-like-missing-picture-vector-43938299.jpg"}  />
             </div>
           )}
           <div>

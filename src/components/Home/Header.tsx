@@ -5,7 +5,7 @@ import "../../styles/Home/Header.scss";
 import { Account } from "../../interfaces/global";
 import AddTrip from "./AddTrip";
 import ChoosePicture from "./ChoosePicture";
-import { newTrip, resetTripFlags } from "../../store/Trips/Trips";
+import { newTrip, resetTripFlags, search } from "../../store/Trips/Trips";
 import { useDispatch, useSelector } from "react-redux";
 import circleYesLogo from "./Logo/Circle-Yes.svg";
 import close from "./Logo/close.svg";
@@ -37,7 +37,8 @@ const Header: React.FC<Props> = ({ user, showMessage, setShowMessage }) => {
   const [errorStartDate, setErrorStartDate] = useState<Boolean>(false);
   const [endDate, setEndDate] = useState<Date | null>();
   const [errorEndDate, setErrorEndDate] = useState<Boolean>(false);
-  const [description, setDescription] = useState<string>();
+  const [description, setDescription] = useState<string | null>();
+  const [status, setStatus] = useState<Boolean | undefined>(true);
   const addTripHandler = async (e: any) => {
     e.preventDefault();
     tripDestination
@@ -68,6 +69,7 @@ const Header: React.FC<Props> = ({ user, showMessage, setShowMessage }) => {
       formData.append("endDate", endDate);
       formData.append("LogoTrips", selectedFile);
       formData.append("description", description);
+      formData.append("status", status);
 
       try {
         await dispatch(newTrip(formData));
@@ -90,6 +92,8 @@ const Header: React.FC<Props> = ({ user, showMessage, setShowMessage }) => {
         startDate,
         endDate,
         LogoTrips: selectedFile,
+        description: description,
+        status,
       };
       try {
         await dispatch(newTrip(dataTrip));
@@ -99,7 +103,12 @@ const Header: React.FC<Props> = ({ user, showMessage, setShowMessage }) => {
     }
   };
   useEffect(() => {
-    if (Trips.newTrip?.result === true || Trips.deleteTrip?.result === true) {
+    if (
+      Trips.newTrip?.result === true ||
+      Trips.deleteTrip?.result === true ||
+      Trips.addUserFromTrip?.result === true ||
+      Trips.removeUserFromTrip?.result === true
+    ) {
       setShowAddTrip(false);
       setShowMessage(true);
       setTripDestination(null);
@@ -109,9 +118,7 @@ const Header: React.FC<Props> = ({ user, showMessage, setShowMessage }) => {
       setStartDate(null);
       setEndDate(null);
       setSelectedFile(null);
-
-      console.log("useEffect");
-
+      setDescription(null);
       const timer = setTimeout(() => {
         setShowMessage(false);
         dispatch(resetTripFlags());
@@ -119,19 +126,35 @@ const Header: React.FC<Props> = ({ user, showMessage, setShowMessage }) => {
 
       return () => clearTimeout(timer);
     }
-  }, [Trips?.newTrip.result || Trips?.deleteTrip.result]);
+  }, [
+    Trips?.newTrip.result ||
+      Trips?.deleteTrip.result ||
+      Trips.addUserFromTrip?.result ||
+      Trips.removeUserFromTrip?.result,
+  ]);
+  const [searchExpanded, setSearchExpanded] = useState(false);
 
-  console.log("newTrip ", Trips?.newTrip?.result);
-  console.log("deleteTrip ", Trips?.deleteTrip?.result);
-  console.log("show message", showMessage);
+  const toggleSearch = () => {
+    setSearchExpanded(!searchExpanded);
+  };
   return (
     <div className="homeHeader">
       <div className="title">
         {user?.case === "admin" ? <h1>Add Trip</h1> : <h1>All Trips</h1>}
       </div>
       <div className="addTeamContainer">
-        <div className="containerLogoSearch">
+        <div className="containerLogoSearch" onClick={toggleSearch}>
           <img src={searchLogo} alt="searchLogo" />
+          {searchExpanded && (
+            <input
+              type="text"
+              className="searchInput"
+              placeholder="Search..."
+              autoFocus
+              onClick={(e) => e.stopPropagation()}
+              onChange={(e) => dispatch(search(e.target.value))}
+            />
+          )}
         </div>
         {user?.case === "admin" ? (
           <div
@@ -150,6 +173,7 @@ const Header: React.FC<Props> = ({ user, showMessage, setShowMessage }) => {
               <ChoosePicture
                 setSelectedFile={setSelectedFile}
                 selectedFile={selectedFile}
+                srcImage={null}
               />
             </div>
             <form onSubmit={addTripHandler}>
@@ -240,12 +264,39 @@ const Header: React.FC<Props> = ({ user, showMessage, setShowMessage }) => {
                   }}
                 />
               </label>
+
               <label
                 className={
                   errorEndDate ? "inputField errorInputField" : "inputField"
                 }
               >
-                <label>Description</label>
+                <label>Status</label>
+                <select
+                  onChange={(e) => {
+                    const selectedValue = e.target.value;
+                    if (selectedValue === "Available") {
+                      setStatus(true);
+                    } else if (selectedValue === "Not available") {
+                      setStatus(false);
+                    } else {
+                      setStatus(undefined);
+                    }
+                  }}
+                  value={
+                    status === true
+                      ? "Available"
+                      : status === false
+                      ? "Not available"
+                      : ""
+                  }
+                >
+                  <option disabled>Status</option>
+                  <option value="Available">Available</option>
+                  <option value="Not available">Not Available</option>
+                  <option value="" hidden></option>
+                </select>
+
+                <label style={{ marginTop: 8 }}>Description</label>
                 <textarea
                   style={{ resize: "none" }}
                   placeholder="Enter Description"
@@ -268,6 +319,14 @@ const Header: React.FC<Props> = ({ user, showMessage, setShowMessage }) => {
           </span>
           <span>
             {Trips?.deleteTrip?.result && "The flight has been deleted"}
+          </span>
+          <span>
+            {Trips?.addUserFromTrip?.result &&
+              "You have been added to this trip"}
+          </span>
+          <span>
+            {Trips?.removeUserFromTrip?.result &&
+              "You have been removed from this trip"}
           </span>
         </div>
       )}

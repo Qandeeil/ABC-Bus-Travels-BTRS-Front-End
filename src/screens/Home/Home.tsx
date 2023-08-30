@@ -40,8 +40,13 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     dispatch(getTrips());
-  }, [Trips?.newTrip, Trips?.deleteTrip]);
-
+  }, [
+    Trips?.newTrip,
+    Trips?.deleteTrip,
+    Trips?.addUserFromTrip,
+    Trips?.removeUserFromTrip,
+    Trips?.updateTrip,
+  ]);
 
   const user = Accounts.accounts.find(
     (user: Account) => user._id === dataAccount?._id
@@ -49,11 +54,13 @@ const Home: React.FC = () => {
 
   const [tripDetails, setTripDetails] = useState<Trips>();
 
+  console.log(Trips.search);
+
   return (
     <div className="home">
       {dataAccount && (
         <div className="infoAccount">
-          <SectionLeft user={user} />
+          <SectionLeft user={user} setDataAccount={setDataAccount} />
           <div className="content">
             <Header
               user={user}
@@ -62,13 +69,28 @@ const Home: React.FC = () => {
             />
             <div className="trips">
               {!tripDetails &&
-                Trips?.trips.map((trip: Trips) => (
-                  <CardTrip
-                    trip={trip}
-                    setTripDetails={setTripDetails}
-                    key={trip._id}
-                  />
-                ))}
+                (Trips.resultSearch?.length > 0
+                  ? Trips.resultSearch
+                      .slice()
+                      .reverse()
+                      .map((trip: Trips) => (
+                        <CardTrip
+                          trip={trip}
+                          setTripDetails={setTripDetails}
+                          key={trip._id}
+                        />
+                      ))
+                  : Trips.trips
+                      .slice()
+                      .reverse()
+                      .map((trip: Trips) => (
+                        <CardTrip
+                          trip={trip}
+                          setTripDetails={setTripDetails}
+                          key={trip._id}
+                        />
+                      )))}
+
               {tripDetails && (
                 <TripDetails
                   tripDetails={tripDetails}
@@ -80,7 +102,6 @@ const Home: React.FC = () => {
           </div>
         </div>
       )}
-      <button onClick={() => setDataAccount(null)}>Logout</button>
     </div>
   );
 };

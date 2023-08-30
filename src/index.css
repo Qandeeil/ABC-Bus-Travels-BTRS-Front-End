@@ -2,6 +2,7 @@ body {
   margin: 0;
   font-family: "Inter", sans-serif;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 * {
@@ -19,4 +20,40 @@ input::-webkit-inner-spin-button {
 }
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+.addTeamContainer {
+  display: flex;
+  align-items: center;
+}
+
+.containerLogoSearch {
+  background-color: #d9d9d9;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 1rem;
+
+}
+
+.containerLogoSearch img {
+  width: 16px;
+  height: 16px;
+  object-fit: cover;
+}
+
+.searchInput {
+  width: 0;
+  padding: 8px;
+  border: none;
+  background-color: transparent;
+  transition: width 0.3s ease;
+  outline: none;
+}
+
+.containerLogoSearch:hover .searchInput,
+.containerLogoSearch:focus-within .searchInput {
+  width: 250px;
 }

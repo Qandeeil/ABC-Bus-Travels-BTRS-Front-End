@@ -8,9 +8,10 @@ import { Account } from "../../interfaces/global";
 
 type Props = {
   user: Account
+  setDataAccount: any
 }
 
-const SectionLeft: React.FC<Props> = ({user}) => {
+const SectionLeft: React.FC<Props> = ({user, setDataAccount}) => {
   return (
     <div className="homeSectionLeft">
       <div className="logo">
@@ -36,6 +37,7 @@ const SectionLeft: React.FC<Props> = ({user}) => {
           <span>{user?.address}, {user?.country}</span>
         </div>
       </div>
+      <button onClick={() => setDataAccount(null)}>Logout</button>
     </div>
   );
 };

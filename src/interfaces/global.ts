@@ -19,6 +19,7 @@ export interface Trip {
   price: Number,
   busNumber: Number,
   flightSupervisor: string,
+  description: string
 }
 
 export interface Trips {
@@ -32,5 +33,6 @@ export interface Trips {
   logoTrips: string,
   passengers: [{}],
   numberOfSeats: number,
-  description: string
+  description: string,
+  status: boolean
 }

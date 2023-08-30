@@ -1,15 +1,24 @@
 .home {
-    padding: 20px;
-    height: calc(100vh - 20px);
-    & .infoAccount {
+  padding: 20px;
+  height: calc(100vh - 20px);
+  overflow: hidden;
+  & .infoAccount {
+    display: flex;
+    & .content {
+      width: 80%;
+      & .trips {
         display: flex;
-        & .content {
-            width: 80%;
-            & .trips {
-                display: flex;
-                align-items: center;
-                flex-wrap: wrap;
-            }
+        align-items: center;
+        flex-wrap: wrap;
+        height: calc(100vh - 5rem - 20px);
+        overflow-y: scroll;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+        &::-webkit-scrollbar {
+          width: 0;
+          height: 0;
         }
+      }
     }
+  }
 }

@@ -6,7 +6,7 @@ import { Trips } from "../../interfaces/global";
 
 type Props = {
   trip: Trips;
-  setTripDetails: any
+  setTripDetails: any;
 };
 
 const CardTrip = ({ trip, setTripDetails }: Props) => {
@@ -19,6 +19,15 @@ const CardTrip = ({ trip, setTripDetails }: Props) => {
     <div className="cardTrip" onClick={() => setTripDetails(trip)}>
       <div className="conatinerImage">
         <img src={trip.logoTrips} alt="Rome" />
+        {trip.status ? (
+          <div className="status true">
+            <span>Available</span>
+          </div>
+        ) : (
+          <div className="status false">
+            <span>Not Available</span>
+          </div>
+        )}
       </div>
       <div className="contentTrip">
         <div className="locationTrip">

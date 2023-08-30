@@ -14,19 +14,32 @@
   & .addTeamContainer {
     display: flex;
     align-items: center;
-    & .containerLogoSearch {
-      background-color: #d9d9d9;
-      padding: 10px 15px;
-      display: flex;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-right: 1rem;
-      & img {
-        width: 16px;
-        height: 16px;
-        object-fit: cover;
-      }
-    }
+    // & .containerLogoSearch {
+    //   background-color: #d9d9d9;
+    //   padding: 10px 15px;
+    //   display: flex;
+    //   align-items: center;
+    //   border-radius: 8px;
+    //   cursor: pointer;
+    //   margin-right: 1rem;
+    //   & img {
+    //     width: 16px;
+    //     height: 16px;
+    //     object-fit: cover;
+    //   }
+    //   & .searchInput {
+    //     width: 0;
+    //     padding: 8px;
+    //     border: none;
+    //     background-color: transparent;
+    //     transition: width 0.3s ease;
+    //     outline: none;
+    //   }
+    //   & .containerLogoSearch:hover .searchInput,
+    //   & .containerLogoSearch:focus-within .searchInput {
+    //     width: 250px;
+    //   }
+    // }
     & .containerAddLogo {
       display: flex;
       align-items: center;
@@ -63,7 +76,7 @@
     top: -5rem;
     animation: moveMessage 3s;
     & img {
-        margin-right: 1rem;
+      margin-right: 1rem;
     }
     & span {
       font-size: 14px;
@@ -73,33 +86,32 @@
   }
 }
 
-
 @keyframes moveMessage {
-    0% {
-        top: -5rem;
-    }
-    20% {
-        top: 1.5rem;
-    }
-    30% {
-        top: 1.5rem;
-    }
-    40% {
-        top: 1.5rem;
-    }
-    50% {
-        top: 1.5rem;
-    }
-    60% {
-        top: 1.5rem;
-    }
-    70% {
-        top: 1.5rem;
-    }
-    80% {
-        top: 1.5rem;
-    }
-    100% {
-        top: -5rem;
-    }
+  0% {
+    top: -5rem;
+  }
+  20% {
+    top: 1.5rem;
+  }
+  30% {
+    top: 1.5rem;
+  }
+  40% {
+    top: 1.5rem;
+  }
+  50% {
+    top: 1.5rem;
+  }
+  60% {
+    top: 1.5rem;
+  }
+  70% {
+    top: 1.5rem;
+  }
+  80% {
+    top: 1.5rem;
+  }
+  100% {
+    top: -5rem;
+  }
 }
