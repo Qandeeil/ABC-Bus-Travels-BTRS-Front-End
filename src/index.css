@@ -57,3 +57,7 @@ input[type="number"] {
 .containerLogoSearch:focus-within .searchInput {
   width: 250px;
 }
+
+.buttonLoading {
+  background-color: #1b243046;
+}

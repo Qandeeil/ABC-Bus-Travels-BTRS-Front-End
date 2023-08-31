@@ -50,23 +50,34 @@ const initialState = {
   createAccount: null,
   updateAccount: null,
   updateProfilePicture: null,
+  isLoading: false
 };
 
 const singupSlice = createSlice({
   name: "signup",
   initialState,
   extraReducers: {
-    [createAccount.pending]: (state, action) => {},
+    [createAccount.pending]: (state, action) => {
+      state.isLoading = true
+    },
     [createAccount.fulfilled]: (state, action) => {
+      state.isLoading = false
       state.createAccount = action.payload;
     },
-    [createAccount.rejected]: (state, action) => {},
+    [createAccount.rejected]: (state, action) => {
+      state.isLoading = false
+    },
 
-    [updateAccount.pending]: (state, action) => {},
+    [updateAccount.pending]: (state, action) => {
+      state.isLoading = true
+    },
     [updateAccount.fulfilled]: (state, action) => {
+      state.isLoading = false
       state.updateAccount = action.payload;
     },
-    [updateAccount.rejected]: (state, action) => {},
+    [updateAccount.rejected]: (state, action) => {
+      state.isLoading = false
+    },
 
     [updateProfilePicture.pending]: (state, action) => {},
     [updateProfilePicture.fulfilled]: (state, action) => {

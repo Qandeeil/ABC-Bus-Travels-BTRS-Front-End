@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../../../../styles/Registration/SignUp/SectionRight/Button.scss";
 import {
   createAccount,
@@ -6,6 +6,7 @@ import {
 } from "../../../../store/Registration/SignUp";
 import { useDispatch, useSelector } from "react-redux";
 import useLocalStorage from "use-local-storage";
+import Loading from "../../../Global/Loading";
 
 const Button = (props) => {
   const {
@@ -38,7 +39,7 @@ const Button = (props) => {
   const registerAccountHandler = (e) => {
     e.preventDefault();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (title === "Registration") {
+    if (title == "Registration") {
       !fullname ? setErrorFullname(true) : setErrorFullname(false);
       !username ? setErrorUsername(true) : setErrorUsername(false);
       !email ? setErrorEmail(true) : setErrorEmail(false);
@@ -63,7 +64,9 @@ const Button = (props) => {
         };
         dispatch(createAccount({ data: data, case: caseSignup }));
       }
-    } else if (title === "Continue") {
+    }
+    
+    if (title == "Continue") {
       !phoneNumber ? setErrorPhoneNumber(true) : setErrorPhoneNumber(false);
       !country ? setErrorCountry(true) : setErrorCountry(false);
       !address ? setErrorAddress(true) : setErrorAddress(false);
@@ -71,35 +74,16 @@ const Button = (props) => {
 
     if (phoneNumber && country && address) {
       const data = {
-        _id: SignUp?.createAccount?.userId
-          ? SignUp?.createAccount?.userId
+        _id: SignUp?.createAccount?.DataAccount?._id
+          ? SignUp?.createAccount?.DataAccount?._id
           : SignUp?.createAccount?.adminId,
         phoneNumber: `+${phoneNumber}`,
         country: country,
         address: address,
       };
       dispatch(updateAccount({ data: data, case: caseSignup }));
-    } else if (phoneNumber && country) {
-      const data = {
-        _id: SignUp?.createAccount?.userId
-          ? SignUp?.createAccount?.userId
-          : SignUp?.createAccount?.adminId,
-        phoneNumber: `+${phoneNumber}`,
-        country: country,
-      };
-      dispatch(updateAccount({ data: data, case: caseSignup }));
-    } else if (address) {
-      const data = {
-        _id: SignUp?.createAccount?.userId
-          ? SignUp?.createAccount?.userId
-          : SignUp?.createAccount?.adminId,
-        address: address,
-      };
-      dispatch(updateAccount({ data: data, case: caseSignup }));
-    }
-    setDataAccount(SignUp?.createAccount?.DataAccount);
+    } 
   };
-
 
   useEffect(() => {
     if (SignUp?.createAccount?.userId || SignUp?.createAccount?.adminId) {
@@ -107,7 +91,10 @@ const Button = (props) => {
       setPersonalInfo(false);
       setHome(false);
     }
-  }, [SignUp?.createAccount?.userId, SignUp?.createAccount?.adminId, setResidencyInfo, setPersonalInfo, setHome]);
+    if(SignUp?.updateAccount?.update) {
+      setDataAccount(SignUp?.createAccount?.DataAccount);
+    }
+  }, [SignUp, dataAccount]);
 
   useEffect(() => {
     if (dataAccount) {
@@ -117,7 +104,7 @@ const Button = (props) => {
   
   return (
     <div className="buttonRegistration">
-      <button onClick={registerAccountHandler}>{title}</button>
+      <button onClick={registerAccountHandler} className={SignUp.isLoading && "buttonLoading"}>{SignUp.isLoading ? <Loading /> : title}</button>
     </div>
   );
 };

@@ -12,17 +12,22 @@ export const loginAccount = createAsyncThunk("login/loginAccount", async (Data, 
   }
 });
 
-const initialState = { isLogin: null };
+const initialState = { isLogin: null, isLoading: false };
 
 const loginSlice = createSlice({
   name: "login",
   initialState,
   extraReducers: {
-    [loginAccount.pending]: (state, action) => {},
+    [loginAccount.pending]: (state, action) => {
+      state.isLoading = true
+    },
     [loginAccount.fulfilled]: (state, action) => {
+      state.isLoading = false
       state.isLogin = action.payload;
     },
-    [loginAccount.rejected]: (state, action) => {},
+    [loginAccount.rejected]: (state, action) => {
+      state.isLoading = false
+    },
   },
 });
 

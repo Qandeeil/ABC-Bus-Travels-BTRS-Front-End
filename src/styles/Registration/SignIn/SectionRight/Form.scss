@@ -107,5 +107,13 @@
         color: #1565d8;
       }
     }
+    & .buttonLoading {
+      background-color: #1566d82e;
+      border: 2px solid #1566d82e;
+      cursor: default;
+      &:hover {
+        background-color: #1566d82e;
+      }
+    }
   }
 }

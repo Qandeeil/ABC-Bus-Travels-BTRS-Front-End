@@ -35,7 +35,7 @@ const CardTrip = ({ trip, setTripDetails }: Props) => {
         </div>
         <div className="timeTrip">
           <img src={location} alt="location"/>
-          <span>{numDays} Days Trip</span>
+          <span>{numDays === 0 ? 'In the same day' : numDays + " Days Trip"} </span>
         </div>
       </div>
     </div>

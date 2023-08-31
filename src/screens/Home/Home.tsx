@@ -43,7 +43,7 @@ const Home: React.FC = () => {
     Trips?.addUserFromTrip,
     Trips?.removeUserFromTrip,
     Trips?.updateTrip,
-    dispatch, // Include dispatch in the dependency array
+    dispatch,
   ]);
 
   const user = Accounts.accounts.find(
@@ -51,8 +51,6 @@ const Home: React.FC = () => {
   );
 
   const [tripDetails, setTripDetails] = useState<Trips>();
-
-  console.log(Trips.search);
 
   return (
     <div className="home">

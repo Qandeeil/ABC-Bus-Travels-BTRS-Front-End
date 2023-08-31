@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAccount } from "../../../../store/Registration/Login";
 import useLocalStorage from "use-local-storage";
+import Loading from "../../../Global/Loading";
 
 const Form = () => {
   const [, setDataAccount] = useLocalStorage("DataAccount", null);
@@ -34,6 +35,8 @@ const Form = () => {
   useEffect(() => {
     setDataAccount(Login?.isLogin?.DataAccount);
   }, [Login, setDataAccount]);
+
+  console.log(Login.isLoading)
 
   return (
     <div className="formSectionRight">
@@ -95,12 +98,7 @@ const Form = () => {
           <input type="checkbox" id="checkboxLogin" />
           <span>Remember me</span>
         </label>
-        <input
-          type="submit"
-          className="button"
-          value={"Sign in"}
-          onClick={LoginHandler}
-        />
+        <button onClick={LoginHandler} className={Login.isLoading ? "buttonLoading button" : "button"}>{Login.isLoading ? <Loading /> : 'Sign in'}</button>
       </form>
     </div>
   );
