@@ -19,7 +19,7 @@ const SectionLeft: React.FC<Props> = ({user, setDataAccount}) => {
         <span>Oasis</span>
       </div>
       <div className="contentUser">
-        <img src={user?.profilePicture}/>
+        <img src={user?.profilePicture} alt="user"/>
         <h1>{user?.name}</h1>
         <span>{user?.email}</span>
       </div>

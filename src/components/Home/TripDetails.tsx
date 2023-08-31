@@ -187,7 +187,7 @@ const TripDetails = ({ tripDetails, setTripDetails, user }: Props) => {
   return (
     <div className="tripDetails">
       <div className="back" onClick={() => setTripDetails(null)}>
-        <img src={Back} />
+        <img src={Back} alt="back"/>
         <span>Back to Trips</span>
       </div>
       {edit ? (

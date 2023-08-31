@@ -46,19 +46,6 @@ const ChoosePicture = ({setSelectedFile, selectedFile, srcImage}) => {
       <div style={{ width: "100%", height: "100%" }}>
         <div {...getRootProps()} style={{ width: "100%", height: "100%" }}>
           <input {...getInputProps()} onChange={onSelectFile} />
-          {/* <img
-            src={
-              preview
-                ? preview
-                : "https://img.icons8.com/cute-clipart/64/add-image.png"
-            }
-            alt="Uploaded"
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: 'cover'
-            }}
-          /> */}
           {preview ? (
             <img
               src={preview}
@@ -71,7 +58,7 @@ const ChoosePicture = ({setSelectedFile, selectedFile, srcImage}) => {
             />
           ) : (
             <div style={{height: "90%", marginBottom: 0}}>
-              <img src={srcImage ? srcImage : "https://cdn.vectorstock.com/i/preview-1x/82/99/no-image-available-like-missing-picture-vector-43938299.jpg"}  />
+              <img src={srcImage ? srcImage : "https://cdn.vectorstock.com/i/preview-1x/82/99/no-image-available-like-missing-picture-vector-43938299.jpg"} alt="image" />
             </div>
           )}
           <div>

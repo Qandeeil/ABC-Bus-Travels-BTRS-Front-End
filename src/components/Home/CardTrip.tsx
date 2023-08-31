@@ -35,7 +35,7 @@ const CardTrip = ({ trip, setTripDetails }: Props) => {
           <span>${trip.price}</span>
         </div>
         <div className="timeTrip">
-          <img src={location} />
+          <img src={location} alt="location"/>
           <span>{numDays} Days Trip</span>
         </div>
       </div>

@@ -95,7 +95,7 @@ const ResidencyInfo = ({
           caseSignup={caseSignup}
         />
         <div className="secured">
-          <img src={lock} />
+          <img src={lock} alt="lock"/>
           <span>Your Info is safely secured</span>
         </div>
       </form>

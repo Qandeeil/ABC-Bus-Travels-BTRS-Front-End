@@ -306,14 +306,14 @@ const Header: React.FC<Props> = ({ user, showMessage, setShowMessage }) => {
               <button onClick={addTripHandler}>Save</button>
             </form>
             <div className="close" onClick={() => setShowAddTrip(false)}>
-              <img src={close} />
+              <img src={close} alt="close"/>
             </div>
           </div>
         </AddTrip>
       )}
       {showMessage && (
         <div className="showMessage">
-          <img src={circleYesLogo} />
+          <img src={circleYesLogo} alt="circleYesLogo"/>
           <span>
             {Trips?.newTrip?.result && "The flight has been added successfully"}
           </span>

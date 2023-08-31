@@ -56,7 +56,7 @@ const ChoosePicture = ({caseSignup}) => {
             <img src={preview} alt="Uploaded" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }} />
           ) : (
             <div className='chooseProfilePhoto'>
-              <img src='https://freesvg.org/img/1389952697.png' style={{ borderRadius: '8px', width: '50px' }} />
+              <img src='https://freesvg.org/img/1389952697.png' style={{ borderRadius: '8px', width: '50px' }} alt='selectImage'/>
               <span>Click and choose profile photo</span>
             </div>
           )}

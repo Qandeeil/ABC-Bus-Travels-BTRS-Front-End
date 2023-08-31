@@ -36,8 +36,8 @@ const SectionRight = ({ setHome, setPersonalInfo, setCaseSignup }) => {
         </div>
         <div className="box" onClick={() => clickHandler("user")}>
           <div className="icon">
-            <img src={polygon1} />
-            <img src={user} />
+            <img src={polygon1} alt="polygon1"/>
+            <img src={user} alt="user"/>
           </div>
           <div className="contentBox">
             <h1>Individual</h1>
@@ -47,8 +47,8 @@ const SectionRight = ({ setHome, setPersonalInfo, setCaseSignup }) => {
         </div>
         <div className="box" onClick={() => setShowCode(true)}>
           <div className="icon">
-            <img src={polygon2} />
-            <img src={briefcase} />
+            <img src={polygon2} alt="polygon2"/>
+            <img src={briefcase} alt="briefcase"/>
           </div>
           <div className="contentBox">
             <h1>Business</h1>
