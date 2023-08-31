@@ -85,16 +85,20 @@ const Button = (props) => {
     } 
   };
 
-  useEffect(() => {
+  const updateFunctions = useCallback(() => {
     if (SignUp?.createAccount?.userId || SignUp?.createAccount?.adminId) {
       setResidencyInfo(true);
       setPersonalInfo(false);
       setHome(false);
     }
-    if(SignUp?.updateAccount?.update) {
+    if (SignUp?.updateAccount?.update) {
       setDataAccount(SignUp?.createAccount?.DataAccount);
     }
-  }, [SignUp, dataAccount]);
+  }, [SignUp, setResidencyInfo, setPersonalInfo, setHome, setDataAccount]);
+
+  useEffect(() => {
+    updateFunctions();
+  }, [updateFunctions]);
 
   useEffect(() => {
     if (dataAccount) {
