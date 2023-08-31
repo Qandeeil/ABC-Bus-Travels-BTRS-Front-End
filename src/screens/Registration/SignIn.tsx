@@ -5,7 +5,7 @@ import "../../styles/Registration/SignIn/SignIn.scss";
 import useLocalStorage from "use-local-storage";
 
 const SignIn: React.FC = () => {
-  const [dataAccount, setDataAccount] = useLocalStorage("DataAccount", null);
+  const [dataAccount,] = useLocalStorage("DataAccount", null);
   useEffect(() => {
     if (dataAccount) {
       window.location.href = "/";

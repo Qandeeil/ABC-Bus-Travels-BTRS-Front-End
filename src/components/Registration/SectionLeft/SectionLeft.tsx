@@ -42,7 +42,6 @@ const SectionLeft = () => {
         "Your travel dreams, our expertise. BTRS specializes in tailoring trips that cater to your unique wanderlust. Whether you're a solo traveler seeking self-discovery, a couple celebrating romance, or a family in search of bonding experiences, we curate journeys that align with your aspirations. Let us bring your travel fantasies to life, one personalized adventure at a time.",
     },
   ];
-  const [wordIndex, setWordIndex] = useState(0);
   const [blurIndex, setBlurIndex] = useState(items.length - 1);
   const settings = {
     dots: false,
@@ -53,7 +52,6 @@ const SectionLeft = () => {
     autoplay: true,
     autoplaySpeed: 5000,
     beforeChange: (current: any, next: any) => {
-      setWordIndex(next);
       setBlurIndex(next);
     },
   };

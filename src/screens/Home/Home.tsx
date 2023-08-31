@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getAccounts } from "../../store/Registration/Accounts";
 import useLocalStorage from "use-local-storage";
@@ -23,7 +22,6 @@ const Home: React.FC = () => {
     null
   );
   const dispatch = useDispatch<any>();
-  const { _id } = useParams();
   const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
@@ -33,7 +31,7 @@ const Home: React.FC = () => {
       dispatch(getAccounts());
       dispatch(getTrips());
     }
-  }, [dataAccount]);
+  }, [dataAccount, dispatch]); // Include dispatch in the dependency array
 
   const { Accounts, Trips } = useSelector((state: any) => state);
 
@@ -45,6 +43,7 @@ const Home: React.FC = () => {
     Trips?.addUserFromTrip,
     Trips?.removeUserFromTrip,
     Trips?.updateTrip,
+    dispatch, // Include dispatch in the dependency array
   ]);
 
   const user = Accounts.accounts.find(

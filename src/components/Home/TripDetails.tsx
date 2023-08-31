@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../../styles/Home/TripDetails.scss";
 import { Account, Trips } from "../../interfaces/global";
 import Back from "./Logo/Back.svg";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   addUserFromTrip,
   deleteTrip,
@@ -22,7 +22,6 @@ const TripDetails = ({ tripDetails, setTripDetails, user }: Props) => {
   const endDate: any = new Date(tripDetails.endDate);
 
   const dispatch = useDispatch<any>();
-  const { Trips } = useSelector((state): any => state);
   const [edit, setEdit] = useState<boolean>(false);
   const [selectedFile, setSelectedFile] = useState<any>();
   const [tripDestination, setTripDestination] = useState<string | null>(
@@ -32,7 +31,7 @@ const TripDetails = ({ tripDetails, setTripDetails, user }: Props) => {
   const [flightSupervisor, setFlightSupervisor] = useState<string | null>(
     tripDetails.flightSupervisor
   );
-  const [price, setPrice] = useState<Number | null>(tripDetails.price);
+  const [price] = useState<Number | null>(tripDetails.price);
   const [startDateState, setStartDate] = useState<Date | null>(
     tripDetails.startDate ? new Date(tripDetails.startDate) : null
   );
@@ -168,10 +167,11 @@ const TripDetails = ({ tripDetails, setTripDetails, user }: Props) => {
             className="cancelReservation"
             onClick={removeUserFromTripHandler}
           >
-            cancellation of reservation
+            Cancellation of Reservation
           </button>
         );
-        return (persResult = true);
+        persResult = true;
+        return null;
       }
       if (!persResult) {
         result = (
@@ -180,6 +180,7 @@ const TripDetails = ({ tripDetails, setTripDetails, user }: Props) => {
           </button>
         );
       }
+      return null;
     });
     return result;
   };
@@ -187,7 +188,7 @@ const TripDetails = ({ tripDetails, setTripDetails, user }: Props) => {
   return (
     <div className="tripDetails">
       <div className="back" onClick={() => setTripDetails(null)}>
-        <img src={Back} alt="back"/>
+        <img src={Back} alt="back" />
         <span>Back to Trips</span>
       </div>
       {edit ? (

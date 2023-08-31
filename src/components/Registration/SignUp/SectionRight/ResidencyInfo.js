@@ -20,7 +20,7 @@ const ResidencyInfo = ({
   const [address, setAddress] = useState();
 
   const [errorPhoneNumber, setErrorPhoneNumber] = useState(false);
-  const [errorCountry, setErrorCountry] = useState(false);
+  const [, setErrorCountry] = useState(false);
   const [errorAddress, setErrorAddress] = useState(false);
 
   return (

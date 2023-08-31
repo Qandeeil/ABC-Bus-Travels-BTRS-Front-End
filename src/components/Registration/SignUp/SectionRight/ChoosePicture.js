@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useDropzone } from 'react-dropzone';
-import { useSelector, useDispatch } from 'react-redux';
-import { updateProfilePicture } from '../../../../store/Registration/SignUp';
-import '../../../../styles/Registration/SignUp/SectionRight/ChoosePicture.scss';
+import React, { useEffect, useState } from "react";
+import { useDropzone } from "react-dropzone";
+import { useSelector, useDispatch } from "react-redux";
+import { updateProfilePicture } from "../../../../store/Registration/SignUp";
+import "../../../../styles/Registration/SignUp/SectionRight/ChoosePicture.scss";
 
-const ChoosePicture = ({caseSignup}) => {
+const ChoosePicture = ({ caseSignup }) => {
   const dispatch = useDispatch();
-  const { SignUp } = useSelector(state => state);
+  const { SignUp } = useSelector((state) => state);
 
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
@@ -28,14 +28,22 @@ const ChoosePicture = ({caseSignup}) => {
 
   useEffect(() => {
     const formData = new FormData();
-    formData.append('_id', SignUp?.createAccount?.userId ? SignUp?.createAccount?.userId : SignUp?.createAccount?.adminId);
+    formData.append(
+      "_id",
+      SignUp?.createAccount?.userId || SignUp?.createAccount?.adminId
+    );
 
     if (selectedFile) {
-      formData.append('profilePicture', selectedFile);
-      dispatch(updateProfilePicture({data: formData, case: caseSignup}));
+      formData.append("profilePicture", selectedFile);
+      dispatch(updateProfilePicture({ data: formData, case: caseSignup }));
     }
-    console.log(selectedFile)
-  }, [selectedFile, SignUp?.createAccount?.userId, SignUp?.createAccount?.adminId, dispatch]);
+  }, [
+    selectedFile,
+    SignUp?.createAccount?.userId,
+    SignUp?.createAccount?.adminId,
+    dispatch,
+    caseSignup,
+  ]);
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
@@ -48,15 +56,44 @@ const ChoosePicture = ({caseSignup}) => {
   };
 
   return (
-    <div className='choosePictureSliderRight'>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '81%' }}>
-        <div {...getRootProps()} style={{ width: 150, height: 150, border: '1px dashed #ccc', borderRadius: '8px' }} className='containerImage'>
+    <div className="choosePictureSliderRight">
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "81%",
+        }}
+      >
+        <div
+          {...getRootProps()}
+          style={{
+            width: 150,
+            height: 150,
+            border: "1px dashed #ccc",
+            borderRadius: "8px",
+          }}
+          className="containerImage"
+        >
           <input {...getInputProps()} onChange={onSelectFile} />
           {preview ? (
-            <img src={preview} alt="Uploaded" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }} />
+            <img
+              src={preview}
+              alt="Uploaded"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                borderRadius: "8px",
+              }}
+            />
           ) : (
-            <div className='chooseProfilePhoto'>
-              <img src='https://freesvg.org/img/1389952697.png' style={{ borderRadius: '8px', width: '50px' }} alt='selectImage'/>
+            <div className="chooseProfilePhoto">
+              <img
+                src="https://freesvg.org/img/1389952697.png"
+                style={{ borderRadius: "8px", width: "50px" }}
+                alt="selectImage"
+              />
               <span>Click and choose profile photo</span>
             </div>
           )}

@@ -107,7 +107,7 @@ const Button = (props) => {
       setPersonalInfo(false);
       setHome(false);
     }
-  }, [SignUp, dataAccount]);
+  }, [SignUp?.createAccount?.userId, SignUp?.createAccount?.adminId, setResidencyInfo, setPersonalInfo, setHome]);
 
   useEffect(() => {
     if (dataAccount) {

@@ -41,16 +41,14 @@ const ChoosePicture = ({ setSelectedFile, selectedFile, srcImage }) => {
             }}
           />
         ) : (
-          <div style={{ height: "90%", marginBottom: 0 }}>
-            <img
-              src={
-                srcImage ||
-                "https://cdn.vectorstock.com/i/preview-1x/82/99/no-image-available-like-missing-picture-vector-43938299.jpg"
-              }
-              alt="image"
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
-            />
-          </div>
+          <img
+            src={
+              srcImage ||
+              "https://cdn.vectorstock.com/i/preview-1x/82/99/no-image-available-like-missing-picture-vector-43938299.jpg"
+            }
+            alt="Placeholder"
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          />
         )}
         <div style={{ marginTop: 10 }}>
           <span>Click and choose a photo</span>

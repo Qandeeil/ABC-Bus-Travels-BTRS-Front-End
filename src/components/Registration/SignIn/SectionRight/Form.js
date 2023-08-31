@@ -6,7 +6,7 @@ import { loginAccount } from "../../../../store/Registration/Login";
 import useLocalStorage from "use-local-storage";
 
 const Form = () => {
-  const [dataAccount, setDataAccount] = useLocalStorage("DataAccount", null);
+  const [, setDataAccount] = useLocalStorage("DataAccount", null);
   const { Login } = useSelector((state) => state);
   const dispatch = useDispatch();
   const [emailORusername, setEmailORusername] = useState();
@@ -29,11 +29,11 @@ const Form = () => {
       setErrorPassword(false);
       dispatch(loginAccount(Data));
     }
-  }; 
+  };
 
   useEffect(() => {
-    setDataAccount(Login?.isLogin?.DataAccount)
-  }, [Login]); 
+    setDataAccount(Login?.isLogin?.DataAccount);
+  }, [Login, setDataAccount]);
 
   return (
     <div className="formSectionRight">
@@ -51,8 +51,7 @@ const Form = () => {
         </p>
         <div
           className={
-            errorEmail ||
-            (Login.isLogin && !Login?.isLogin?.isLoginEmail)
+            errorEmail || (Login.isLogin && !Login?.isLogin?.isLoginEmail)
               ? "container errorContainer"
               : "container"
           }
@@ -73,8 +72,7 @@ const Form = () => {
         </div>
         <div
           className={
-            errorPassword ||
-            (Login.isLogin && !Login?.isLogin?.isLoginPassword)
+            errorPassword || (Login.isLogin && !Login?.isLogin?.isLoginPassword)
               ? "container errorContainer"
               : "container"
           }

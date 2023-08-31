@@ -1,6 +1,6 @@
-import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { Trip, Trips } from "../../interfaces/global";
+import { Trip } from "../../interfaces/global";
 
 const baseURL = "https://abc-bus-travels-btrs-back-end-production.up.railway.app";
 
