@@ -104,10 +104,10 @@ const Header: React.FC<Props> = ({ user, showMessage, setShowMessage }) => {
   };
   useEffect(() => {
     if (
-      Trips.newTrip?.result === true ||
-      Trips.deleteTrip?.result === true ||
-      Trips.addUserFromTrip?.result === true ||
-      Trips.removeUserFromTrip?.result === true
+      Trips?.newTrip?.result === true ||
+      Trips?.deleteTrip?.result === true ||
+      Trips?.addUserFromTrip?.result === true ||
+      Trips?.removeUserFromTrip?.result === true
     ) {
       setShowAddTrip(false);
       setShowMessage(true);
@@ -119,19 +119,23 @@ const Header: React.FC<Props> = ({ user, showMessage, setShowMessage }) => {
       setEndDate(null);
       setSelectedFile(null);
       setDescription(null);
+  
       const timer = setTimeout(() => {
         setShowMessage(false);
         dispatch(resetTripFlags());
       }, 3000);
-
+  
       return () => clearTimeout(timer);
     }
   }, [
-    Trips?.newTrip.result ||
-      Trips?.deleteTrip.result ||
-      Trips.addUserFromTrip?.result ||
-      Trips.removeUserFromTrip?.result,
+    Trips?.newTrip?.result,
+    Trips?.deleteTrip?.result,
+    Trips?.addUserFromTrip?.result,
+    Trips?.removeUserFromTrip?.result,
+    dispatch,
+    setShowMessage,
   ]);
+  
   const [searchExpanded, setSearchExpanded] = useState(false);
 
   const toggleSearch = () => {

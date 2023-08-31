@@ -1,5 +1,4 @@
 import React from "react";
-import imageTest from "./Logo/imageTest.svg";
 import location from "./Logo/location.svg";
 import "../../styles/Home/CardTrip.scss";
 import { Trips } from "../../interfaces/global";

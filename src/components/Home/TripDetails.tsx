@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../../styles/Home/TripDetails.scss";
 import { Account, Trip, Trips } from "../../interfaces/global";
 import Back from "./Logo/Back.svg";
