@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { Trip, Trips } from "../../interfaces/global";
 
-const baseURL = "http://localhost:4000";
+const baseURL = "https://abc-bus-travels-btrs-back-end-production.up.railway.app";
 
 export const getTrips = createAsyncThunk(
   "trip/getTrips",
