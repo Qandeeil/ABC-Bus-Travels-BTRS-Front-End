@@ -9,7 +9,7 @@ import { NavLink } from "react-router-dom";
 const SectionRight = ({ setHome, setPersonalInfo, setCaseSignup }) => {
   const clickHandler = (e) => {
     setErrorCode(true);
-    if (code == "2914") {
+    if (code === "2914") {
       setErrorCode(false);
       setHome(false);
       setPersonalInfo(true);

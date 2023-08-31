@@ -4,14 +4,14 @@ import '../../../../styles/Registration/SignUp/SectionRight/Header.scss'
 
 const Header = ({setHome, setPersonalInfo, screen, setResidencyInfo, title, pageNumber, setChoosePicture}) => {
   const changeHandler = () => {
-    if(screen == 'PersonalInfo') {
+    if(screen === 'PersonalInfo') {
       setHome(true)
       setPersonalInfo(false)
-    }else if (screen == 'ResidencyInfo'){
+    }else if (screen === 'ResidencyInfo'){
       setHome(false)
       setPersonalInfo(true)
       setResidencyInfo(false)
-    }else if(screen == 'ChoosePicture') {
+    }else if(screen === 'ChoosePicture') {
       setHome(false)
       setPersonalInfo(false)
       setResidencyInfo(true)

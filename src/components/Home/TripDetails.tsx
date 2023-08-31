@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../../styles/Home/TripDetails.scss";
-import { Account, Trip, Trips } from "../../interfaces/global";
+import { Account, Trips } from "../../interfaces/global";
 import Back from "./Logo/Back.svg";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -162,7 +162,7 @@ const TripDetails = ({ tripDetails, setTripDetails, user }: Props) => {
     let result: any = null;
     let persResult = false;
     passengers.map((pass: any) => {
-      if (pass == user._id) {
+      if (pass === user._id) {
         result = (
           <button
             className="cancelReservation"
@@ -356,14 +356,14 @@ const TripDetails = ({ tripDetails, setTripDetails, user }: Props) => {
             </div>
           )}
           {tripDetails.status &&
-            user.case == "user" &&
-            passengers.length == 0 && (
+            user.case === "user" &&
+            passengers.length === 0 && (
               <button onClick={addUserInTripHandler}>
                 Reservation ${tripDetails.price}
               </button>
             )}
-          {user.case == "user" && renderButtonReservation()}
-          {user.case == "admin" && (
+          {user.case === "user" && renderButtonReservation()}
+          {user.case === "admin" && (
             <>
               <button onClick={() => setEdit(true)}>Edit</button>
               <button

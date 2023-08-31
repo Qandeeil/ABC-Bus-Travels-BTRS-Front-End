@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getAccounts } from "../../store/Registration/Accounts";
@@ -6,10 +6,9 @@ import useLocalStorage from "use-local-storage";
 import { Account } from "../../interfaces/global";
 import "../../styles/Home/Home.scss";
 import Header from "../../components/Home/Header";
-import Main from "../../components/Home/Main";
 import SectionLeft from "../../components/Home/SectionLeft";
 import CardTrip from "../../components/Home/CardTrip";
-import { getTrips, resetTripFlags } from "../../store/Trips/Trips";
+import { getTrips } from "../../store/Trips/Trips";
 import { Trips } from "../../interfaces/global";
 import TripDetails from "../../components/Home/TripDetails";
 

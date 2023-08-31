@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "../../../../styles/Registration/SignUp/SectionRight/Button.scss";
 import {
   createAccount,
@@ -38,7 +38,7 @@ const Button = (props) => {
   const registerAccountHandler = (e) => {
     e.preventDefault();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (title == "Registration") {
+    if (title === "Registration") {
       !fullname ? setErrorFullname(true) : setErrorFullname(false);
       !username ? setErrorUsername(true) : setErrorUsername(false);
       !email ? setErrorEmail(true) : setErrorEmail(false);
@@ -63,7 +63,7 @@ const Button = (props) => {
         };
         dispatch(createAccount({ data: data, case: caseSignup }));
       }
-    } else if (title == "Continue") {
+    } else if (title === "Continue") {
       !phoneNumber ? setErrorPhoneNumber(true) : setErrorPhoneNumber(false);
       !country ? setErrorCountry(true) : setErrorCountry(false);
       !address ? setErrorAddress(true) : setErrorAddress(false);
