@@ -13,11 +13,11 @@ import store from './store';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/Signin",
     element: <Home />,
   },
   {
-    path: "/Signin",
+    path: "/",
     element: <SignIn />,
   },
   {
