@@ -7,7 +7,7 @@ import briefcase from "./icon/briefcase.svg";
 import { NavLink } from "react-router-dom";
 
 const SectionRight = ({ setHome, setPersonalInfo, setCaseSignup }) => {
-  const clickHandler = (e) => {
+  const clickHandlerAdmin = (e) => {
     setErrorCode(true);
     if (code === "2914") {
       setErrorCode(false);
@@ -15,6 +15,11 @@ const SectionRight = ({ setHome, setPersonalInfo, setCaseSignup }) => {
       setPersonalInfo(true);
       setCaseSignup(e);
     }
+  };
+  const clickHandlerUser = (e) => {
+    setHome(false);
+    setPersonalInfo(true);
+    setCaseSignup(e);
   };
   const [showCode, setShowCode] = useState(false);
   const [code, setCode] = useState();
@@ -34,10 +39,10 @@ const SectionRight = ({ setHome, setPersonalInfo, setCaseSignup }) => {
             opening.
           </span>
         </div>
-        <div className="box" onClick={() => clickHandler("user")}>
+        <div className="box" onClick={() => clickHandlerUser("user")}>
           <div className="icon">
-            <img src={polygon1} alt="polygon1"/>
-            <img src={user} alt="user"/>
+            <img src={polygon1} alt="polygon1" />
+            <img src={user} alt="user" />
           </div>
           <div className="contentBox">
             <h1>Individual</h1>
@@ -47,8 +52,8 @@ const SectionRight = ({ setHome, setPersonalInfo, setCaseSignup }) => {
         </div>
         <div className="box" onClick={() => setShowCode(true)}>
           <div className="icon">
-            <img src={polygon2} alt="polygon2"/>
-            <img src={briefcase} alt="briefcase"/>
+            <img src={polygon2} alt="polygon2" />
+            <img src={briefcase} alt="briefcase" />
           </div>
           <div className="contentBox">
             <h1>Business</h1>
@@ -65,9 +70,11 @@ const SectionRight = ({ setHome, setPersonalInfo, setCaseSignup }) => {
               type="password"
               placeholder="Enter the code"
               onChange={(e) => setCode(e.target.value)}
-              className={errorCode && 'errorInput'}
+              className={errorCode && "errorInput"}
             />
-            <button onClick={() => clickHandler("admin")}>Check code</button>
+            <button onClick={() => clickHandlerAdmin("admin")}>
+              Check code
+            </button>
           </div>
         </div>
       )}
